@@ -1,0 +1,2 @@
+lib/app/modules/protected/tabs/tab_carimbar_controller.dart
+test/app/modules/protected/tabs/tab_carimbar_controller_test.dart
