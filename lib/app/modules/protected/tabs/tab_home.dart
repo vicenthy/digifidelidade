@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class TabHome extends StatelessWidget {
   const TabHome({
@@ -10,6 +11,9 @@ class TabHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        SizedBox(
+          height: 100,
+        ),
         Center(
           child: Text(
             'Titular do cartão',
@@ -49,17 +53,11 @@ class TabHome extends StatelessWidget {
           onPressed: () {
             Modular.to.pushReplacementNamed('/home');
           },
-          child: Text('ABRIR CARTÃO'),
+          child: Text('EDITAR CARTÃO'),
         ),
-        Container(
-          margin: EdgeInsets.all(12.0),
-          width: 200,
-          height: 200,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black,
-            ),
-          ),
+        QrImage(
+          data: 'codigo',
+          size: 250,
         ),
         Center(
           child: Text(
