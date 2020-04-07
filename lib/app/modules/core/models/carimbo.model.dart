@@ -1,0 +1,3 @@
+class CarimboModel {
+  DateTime dataHoraCarimbo;
+}

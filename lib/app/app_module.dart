@@ -1,8 +1,9 @@
 import 'package:digifidelidade/app/app_controller.dart';
+import 'package:digifidelidade/app/modules/protected/protected_module.dart';
+import 'package:digifidelidade/app/modules/public/public_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 import 'package:digifidelidade/app/app_widget.dart';
-import 'package:digifidelidade/app/modules/home/home_module.dart';
 
 class AppModule extends MainModule {
   @override
@@ -12,7 +13,8 @@ class AppModule extends MainModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, module: HomeModule()),
+        Router(Modular.initialRoute, module: PublicModule()),
+        Router('/home', module: ProtectedModule()),
       ];
 
   @override
