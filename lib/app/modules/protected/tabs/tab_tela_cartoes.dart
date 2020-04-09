@@ -1,6 +1,7 @@
 import 'package:digifidelidade/app/modules/protected/tabs/tab_tela_cartoes_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TabTelaCartoes extends StatefulWidget {
   const TabTelaCartoes({Key key}) : super(key: key);
@@ -26,51 +27,87 @@ class _TabTelaCartoesState
                 ),
               ),
             ),
-            Card(
-              child: Column(
+            Expanded(
+              child: ListView(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          "Cartão 0001",
-                          style: TextStyle(fontSize: 34),
+                  Slidable(
+                    actionPane: SlidableBehindActionPane(),
+                    actionExtentRatio: 0.25,
+                    child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Image.asset(
+                          "assets/img/icon-house.png",
+                          width: 70,
+                          height: 70,
                         ),
+                        trailing: Text(
+                          '03/12',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        title: Text(
+                          'Loja do Joao',
+                          style: TextStyle(fontSize: 24),
+                        ),
+                        subtitle: Text('A cada 12 compras ganha 1 brinde'),
+                      ),
+                    ),
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        caption: 'Participar',
+                        color: Colors.green,
+                        icon: Icons.edit,
+                        onTap: () {},
                       ),
                     ],
                   ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          "Sub titulo",
-                          style: TextStyle(fontSize: 16),
+                  Slidable(
+                    actionPane: SlidableBehindActionPane(),
+                    actionExtentRatio: 0.25,
+                    child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Image.asset(
+                          "assets/img/icon-house.png",
+                          width: 70,
+                          height: 70,
                         ),
+                        trailing: Text(
+                          '03',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        title: Text(
+                          'Loja do William',
+                          style: TextStyle(fontSize: 24),
+                        ),
+                        subtitle: Text(
+                            'Adiquira 10 itens na nossa loja e escolha um item ate R\$20.00'),
+                      ),
+                    ),
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        caption: 'Participar',
+                        color: Colors.green,
+                        icon: Icons.edit,
+                        onTap: () {},
                       ),
                     ],
                   ),
-                  Divider(),
-                  Row(
-                    children: <Widget>[
-                      FlatButton(
-                        child: Text(
-                          "Abrir",
-                          style: TextStyle(
-                            color: Colors.lightBlue,
-                          ),
-                        ),
-                        onPressed: () {
-                          Modular.to.pushNamed('/home/carimbar');
-                        },
-                      )
-                    ],
-                  )
                 ],
               ),
             )
           ],
+        ),
+        floatingActionButton: Container(
+          width: 70,
+          height: 70,
+          child: FloatingActionButton(
+            backgroundColor: Colors.black,
+            child: Icon(
+              Icons.add,
+            ),
+            onPressed: () {},
+          ),
         ),
       ),
     );

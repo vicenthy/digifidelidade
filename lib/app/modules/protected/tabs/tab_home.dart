@@ -81,8 +81,8 @@ class TabHome extends StatelessWidget {
                     ),
                     secondaryActions: <Widget>[
                       IconSlideAction(
-                        caption: 'Participar',
-                        color: Colors.green,
+                        caption: 'Editar',
+                        color: Colors.red,
                         icon: Icons.edit,
                         onTap: () {},
                       ),

@@ -1,4 +1,4 @@
-package com.example.digifidelidade
+package br.com.digifidelidade
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

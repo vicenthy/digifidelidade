@@ -3,6 +3,7 @@ import 'package:digifidelidade/app/modules/protected/tabs/tab_carimbar_controlle
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TabCarimbar extends StatefulWidget {
   const TabCarimbar({Key key}) : super(key: key);
@@ -32,7 +33,7 @@ class _TabCarimbarState
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.fullscreen),
+                  icon: Icon(FontAwesomeIcons.barcode),
                   onPressed: () async {
                     try {
                       String barcode = await BarcodeScanner.scan();
