@@ -3,6 +3,7 @@ import 'package:digifidelidade/app/modules/protected/tabs/tab_home.dart';
 import 'package:digifidelidade/app/modules/protected/tabs/tab_tela_cartoes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -39,6 +40,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     fontSize: 16,
                   ),
                 ),
+                icon: Icon(FontAwesomeIcons.creditCard),
               ),
               Tab(
                 child: Text(
@@ -49,6 +51,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     fontSize: 16,
                   ),
                 ),
+                icon: Icon(FontAwesomeIcons.stamp),
               ),
               Tab(
                 child: Text(
@@ -59,6 +62,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   ),
                   textAlign: TextAlign.center,
                 ),
+                icon: Icon(FontAwesomeIcons.userTag),
               ),
             ],
             labelColor: Colors.white,

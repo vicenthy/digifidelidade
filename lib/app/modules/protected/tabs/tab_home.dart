@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TabHome extends StatelessWidget {
   const TabHome({
@@ -9,67 +9,101 @@ class TabHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 100,
-          ),
-          Center(
-            child: Text(
-              'Titular do cartão',
-              style: TextStyle(
-                fontSize: 23,
+    return Container(
+      child: Scaffold(
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Pesquisar',
+                  suffixIcon: Icon(Icons.search),
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Text(
-              'Participantes: 5',
-              style: TextStyle(
-                fontSize: 23,
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  Slidable(
+                    actionPane: SlidableBehindActionPane(),
+                    actionExtentRatio: 0.25,
+                    child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Image.asset(
+                          "assets/img/icon-house.png",
+                          width: 70,
+                          height: 70,
+                        ),
+                        trailing: Text(
+                          '03/12',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        title: Text(
+                          'Loja do Joao',
+                          style: TextStyle(fontSize: 24),
+                        ),
+                        subtitle: Text('A cada 12 compras ganha 1 brinde'),
+                      ),
+                    ),
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        caption: 'Editar',
+                        color: Colors.red,
+                        icon: Icons.edit,
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                  Slidable(
+                    actionPane: SlidableBehindActionPane(),
+                    actionExtentRatio: 0.25,
+                    child: Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        leading: Image.asset(
+                          "assets/img/icon-house.png",
+                          width: 70,
+                          height: 70,
+                        ),
+                        trailing: Text(
+                          '03',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        title: Text(
+                          'Loja do William',
+                          style: TextStyle(fontSize: 24),
+                        ),
+                        subtitle: Text(
+                            'Adiquira 10 itens na nossa loja e escolha um item ate R\$20.00'),
+                      ),
+                    ),
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        caption: 'Participar',
+                        color: Colors.green,
+                        icon: Icons.edit,
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ],
               ),
+            )
+          ],
+        ),
+        floatingActionButton: Container(
+          width: 70,
+          height: 70,
+          child: FloatingActionButton(
+            backgroundColor: Colors.black,
+            child: Icon(
+              Icons.add,
             ),
+            onPressed: () {},
           ),
-          Center(
-            child: Text(
-              'Validade: dd/MM/yyyy',
-              style: TextStyle(
-                fontSize: 23,
-              ),
-            ),
-          ),
-          Center(
-            child: Text(
-              'Ativo: Sim',
-              style: TextStyle(
-                fontSize: 23,
-              ),
-            ),
-          ),
-          MaterialButton(
-            minWidth: MediaQuery.of(context).size.width / 1.75,
-            color: ThemeData.dark().primaryColor,
-            textColor: Colors.white,
-            onPressed: () {
-              Modular.to.pushNamed('/home/form_cartao');
-            },
-            child: Text('EDITAR CARTÃO'),
-          ),
-          QrImage(
-            data: 'codigo',
-            size: 250,
-          ),
-          Center(
-            child: Text(
-              'codigo',
-              style: TextStyle(
-                fontSize: 64,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
