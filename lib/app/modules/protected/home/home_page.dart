@@ -33,7 +33,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             tabs: <Widget>[
               Tab(
                 child: Text(
-                  'Meus Cartão',
+                  'Cartões',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -55,14 +55,14 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               ),
               Tab(
                 child: Text(
-                  'Cartões que participo',
+                  'Perfil',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                icon: Icon(FontAwesomeIcons.userTag),
+                icon: Icon(FontAwesomeIcons.user),
               ),
             ],
             labelColor: Colors.white,

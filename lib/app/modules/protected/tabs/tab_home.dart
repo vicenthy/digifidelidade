@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TabHome extends StatelessWidget {
@@ -21,6 +21,34 @@ class TabHome extends StatelessWidget {
                   suffixIcon: Icon(Icons.search),
                 ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CupertinoSegmentedControl(
+                  borderColor: Colors.black,
+                  unselectedColor: Colors.white,
+                  selectedColor: Colors.black,
+                  children: const <int, Widget>{
+                    0: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'Todos',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    1: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text('Meus cartões'),
+                    ),
+                    2: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text('Cartões que participo'),
+                    ),
+                  },
+                  groupValue: 0,
+                  onValueChanged: (value) {
+                    print(value);
+                  }),
             ),
             Expanded(
               child: ListView(
