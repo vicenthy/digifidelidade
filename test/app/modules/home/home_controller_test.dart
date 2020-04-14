@@ -1,18 +1,16 @@
+import 'package:digifidelidade/app/modules/protected/protected_module.dart';
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:digifidelidade/digifidelidade/app/modules/home/home_controller.dart';
-import 'package:digifidelidade/digifidelidade/app/modules/home/home_module.dart';
-
 void main() {
-  initModule(HomeModule());
-  // HomeController home;
+  initModule(ProtectedModule());
+  // ProtectedModule home;
   //
   setUp(() {
-    //     home = HomeModule.to.get<HomeController>();
+    //     home = ProtectedModule.to.get<ProtectedModule>();
   });
 
-  group('HomeController Test', () {
+  group('ProtectedModule Test', () {
     //   test("First Test", () {
     //     expect(home, isInstanceOf<HomeController>());
     //   });

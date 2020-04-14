@@ -1,4 +1,6 @@
+import 'package:digifidelidade/app/modules/public/login/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,10 +11,13 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ModularState<LoginPage, LoginController> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -65,32 +70,48 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
+                child: Observer(builder: (_) {
+                  return TextField(
+                    onChanged: (value) {
+                      controller.email = value;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                  );
+                }),
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Senha',
-                  ),
-                  obscureText: true,
-                ),
+                child: Observer(builder: (_) {
+                  return TextField(
+                    onChanged: (value) {
+                      controller.password = value;
+                      print(controller.password);
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Senha',
+                    ),
+                    obscureText: true,
+                  );
+                }),
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: MaterialButton(
-                  color: ThemeData.dark().primaryColor,
-                  textColor: Colors.white,
-                  onPressed: () {
-                    Modular.to.pushReplacementNamed('/home');
-                  },
-                  child: Text('ENTRAR'),
-                ),
+                child: Observer(builder: (_) {
+                  return MaterialButton(
+                    color: ThemeData.dark().primaryColor,
+                    textColor: Colors.white,
+                    onPressed: () {
+                      controller.login();
+                      final snackBar =
+                          SnackBar(content: Text('Yay! A SnackBar!'));
+                      _scaffoldKey.currentState.showSnackBar(snackBar);
+                    },
+                    child: Text('ENTRAR'),
+                  );
+                }),
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),

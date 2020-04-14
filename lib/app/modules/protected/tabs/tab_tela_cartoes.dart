@@ -1,4 +1,5 @@
 import 'package:digifidelidade/app/modules/protected/tabs/tab_tela_cartoes_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,6 +14,20 @@ class _TabTelaCartoesState
     extends ModularState<TabTelaCartoes, TabTelaCartoesController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: MaterialButton(
+          color: Colors.black,
+          child: Text(
+            'Sair',
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {
+            Modular.get<FirebaseAuth>().signOut();
+            Modular.to.pushReplacementNamed('/');
+          },
+        ),
+      ),
+    );
   }
 }

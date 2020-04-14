@@ -1,9 +1,13 @@
+import 'package:digifidelidade/app/modules/core/core_module.dart';
+import 'package:digifidelidade/app/modules/core/services/firebase_auth_service.dart';
 import 'package:digifidelidade/app/modules/protected/carimbos/carimbos_page.dart';
 import 'package:digifidelidade/app/modules/protected/form_cartao/form_cartao_page.dart';
 import 'package:digifidelidade/app/modules/protected/tabs/tab_tela_cartoes_controller.dart';
 import 'package:digifidelidade/app/modules/protected/tabs/tab_carimbar_controller.dart';
 import 'package:digifidelidade/app/modules/protected/carimbos/carimbos_controller.dart';
 import 'package:digifidelidade/app/modules/protected/form_cartao/form_cartao_controller.dart';
+import 'package:digifidelidade/app/modules/public/public_module.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'home/home_controller.dart';
@@ -14,6 +18,7 @@ class ProtectedModule extends ChildModule {
   List<Bind> get binds => [
         Bind((i) => TabTelaCartoesController()),
         Bind((i) => TabCarimbarController()),
+        Bind((i) => PublicModule()),
         Bind((i) => CarimbosController()),
         Bind((i) => FormCartaoController()),
         Bind((i) => HomeController()),
@@ -21,7 +26,10 @@ class ProtectedModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router('/', child: (_, args) => HomePage()),
+        Router(
+          '/',
+          child: (_, args) => HomePage(),
+        ),
         Router('/carimbar', child: (_, args) => CarimbosPage()),
         Router('/form_cartao', child: (_, args) => FormCartaoPage()),
       ];
