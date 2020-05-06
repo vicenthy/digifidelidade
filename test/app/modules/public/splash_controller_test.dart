@@ -1,7 +1,5 @@
 import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:digifidelidade/app/modules/public/splash_controller.dart';
 import 'package:digifidelidade/app/modules/public/public_module.dart';
 
 void main() {

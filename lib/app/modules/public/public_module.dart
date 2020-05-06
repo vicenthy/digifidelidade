@@ -1,10 +1,8 @@
-import 'package:digifidelidade/app/modules/core/services/firebase_auth_service.dart';
 import 'package:digifidelidade/app/modules/public/cadastro/cadastro_controller.dart';
 import 'package:digifidelidade/app/modules/public/cadastro/cadastro_page.dart';
 import 'package:digifidelidade/app/modules/public/login/login_controller.dart';
 import 'package:digifidelidade/app/modules/public/login/login_page.dart';
 import 'package:digifidelidade/app/modules/public/splash_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class PublicModule extends ChildModule {

@@ -1,7 +1,9 @@
-import 'package:digifidelidade/app/modules/core/models/cartao_model.dart';
-import 'package:digifidelidade/app/modules/core/widgets/cartao_qr.widget.dart';
+import 'package:digifidelidade/app/modules/protected/tabs/tab_home_controller.dart';
+import 'package:digifidelidade/app/shared/models/cartao_model.dart';
+import 'package:digifidelidade/app/shared/widgets/cartao_qr.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,7 +17,7 @@ class TabHome extends StatefulWidget {
   _TabHomeState createState() => _TabHomeState();
 }
 
-class _TabHomeState extends State<TabHome> {
+class _TabHomeState extends ModularState<TabHome, TabHomeController> {
   int selectedIndex = 0;
 
   @override
@@ -62,87 +64,31 @@ class _TabHomeState extends State<TabHome> {
                     });
                   }),
             ),
-            Expanded(
-              child: ListView(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) => CartaoQRWidget(CartaoModel()));
-                    },
-                    child: Slidable(
-                      actionPane: SlidableBehindActionPane(),
-                      actionExtentRatio: 0.25,
-                      child: Container(
-                        color: Colors.white,
-                        child: ListTile(
-                          leading: Image.asset(
-                            "assets/img/icon-house.png",
-                            width: 70,
-                            height: 70,
-                          ),
-                          trailing: Text(
-                            '03/12',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          title: Text(
-                            'Loja do Joao',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                          subtitle: Text('A cada 12 compras ganha 1 brinde'),
-                        ),
-                      ),
-                      secondaryActions: <Widget>[
-                        IconSlideAction(
-                          caption: 'Editar',
-                          color: Colors.red,
-                          icon: Icons.edit,
-                          onTap: () {},
-                        ),
-                      ],
+            Expanded(child: Observer(builder: (_) {
+              controller.load();
+              List<CartaoModel> cartoes = controller.cartoes;
+              return ListView.builder(
+                itemCount: cartoes.length,
+                itemBuilder: (_, index) {
+                  return ListTile(
+                    leading: Image.asset(
+                      "assets/img/icon-house.png",
+                      width: 70,
+                      height: 70,
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Modular.to.pushNamed("/home/carimbar");
-                    },
-                    child: Slidable(
-                      actionPane: SlidableBehindActionPane(),
-                      actionExtentRatio: 0.25,
-                      child: Container(
-                        color: Colors.white,
-                        child: ListTile(
-                          leading: Image.asset(
-                            "assets/img/icon-house.png",
-                            width: 70,
-                            height: 70,
-                          ),
-                          trailing: Text(
-                            '03',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          title: Text(
-                            'Loja do William',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                          subtitle: Text(
-                              'Adiquira 10 itens na nossa loja e escolha um item ate R\$20.00'),
-                        ),
-                      ),
-                      secondaryActions: <Widget>[
-                        IconSlideAction(
-                          caption: 'Participar',
-                          color: Colors.green,
-                          icon: FontAwesomeIcons.userTag,
-                          onTap: () {},
-                        ),
-                      ],
+                    trailing: Text(
+                      cartoes[index].qtdDeCarimbo.toString(),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ],
-              ),
-            )
+                    title: Text(
+                      cartoes[index].documentReference.documentID,
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    subtitle: Text(cartoes[index].descricaoPremio),
+                  );
+                },
+              );
+            }))
           ],
         ),
         floatingActionButton: Container(
@@ -154,11 +100,93 @@ class _TabHomeState extends State<TabHome> {
               Icons.add,
             ),
             onPressed: () {
-              Modular.to.pushNamed("/home/form_cartao");
+              Modular.to.pushNamed("/protected/form_cartao");
             },
           ),
         ),
       ),
+    );
+  }
+
+  Widget getList() {
+    return ListView(
+      children: <Widget>[
+        GestureDetector(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (_) => CartaoQRWidget(CartaoModel()));
+          },
+          child: Slidable(
+            actionPane: SlidableBehindActionPane(),
+            actionExtentRatio: 0.25,
+            child: Container(
+              color: Colors.white,
+              child: ListTile(
+                leading: Image.asset(
+                  "assets/img/icon-house.png",
+                  width: 70,
+                  height: 70,
+                ),
+                trailing: Text(
+                  '03/12',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                title: Text(
+                  'Loja do Joao',
+                  style: TextStyle(fontSize: 24),
+                ),
+                subtitle: Text('A cada 12 compras ganha 1 brinde'),
+              ),
+            ),
+            secondaryActions: <Widget>[
+              IconSlideAction(
+                caption: 'Editar',
+                color: Colors.red,
+                icon: Icons.edit,
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Modular.to.pushNamed("/protected/carimbar");
+          },
+          child: Slidable(
+            actionPane: SlidableBehindActionPane(),
+            actionExtentRatio: 0.25,
+            child: Container(
+              color: Colors.white,
+              child: ListTile(
+                leading: Image.asset(
+                  "assets/img/icon-house.png",
+                  width: 70,
+                  height: 70,
+                ),
+                trailing: Text(
+                  '03',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                title: Text(
+                  'Loja do William',
+                  style: TextStyle(fontSize: 24),
+                ),
+                subtitle: Text(
+                    'Adiquira 10 itens na nossa loja e escolha um item ate R\$20.00'),
+              ),
+            ),
+            secondaryActions: <Widget>[
+              IconSlideAction(
+                caption: 'Participar',
+                color: Colors.green,
+                icon: FontAwesomeIcons.userTag,
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

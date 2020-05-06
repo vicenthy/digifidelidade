@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(Duration(seconds: 2)).then((value) {
       Modular.get<FirebaseAuth>().currentUser().then((result) {
         if (result != null) {
-          Modular.to.pushReplacementNamed('/home');
+          Modular.to.pushReplacementNamed('/protected');
         } else {
           Modular.to.pushReplacementNamed('/login');
         }

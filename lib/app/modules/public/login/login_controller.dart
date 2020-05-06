@@ -1,4 +1,4 @@
-import 'package:digifidelidade/app/modules/core/services/firebase_auth_service.dart';
+import 'package:digifidelidade/app/shared/services/firebase_auth_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -30,7 +30,7 @@ abstract class _LoginControllerBase with Store {
     if (isValid) {
       firebsaeauth.login(this.email, this.password).then((result) {
         if (result != null) {
-          Modular.to.pushReplacementNamed('/home');
+          Modular.to.pushReplacementNamed('/protected');
         }
       }).catchError((onError) {
         print(onError);
