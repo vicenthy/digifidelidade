@@ -1,6 +1,6 @@
-import 'package:digifidelidade/app/modules/protected/tabs/tab_carimbar.dart';
-import 'package:digifidelidade/app/modules/protected/tabs/tab_home.dart';
-import 'package:digifidelidade/app/modules/protected/tabs/tab_tela_cartoes.dart';
+import 'package:digifidelidade/app/modules/protected/tabs/carimbar/tab_carimbar.dart';
+import 'package:digifidelidade/app/modules/protected/tabs/cartoes/tab_tela_cartoes.dart';
+import 'package:digifidelidade/app/modules/protected/tabs/home/tab_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,7 +37,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                 ),
                 icon: Icon(FontAwesomeIcons.creditCard),
@@ -48,7 +48,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                 ),
                 icon: Icon(FontAwesomeIcons.stamp),
@@ -58,7 +58,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   'Perfil',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                   textAlign: TextAlign.center,
                 ),

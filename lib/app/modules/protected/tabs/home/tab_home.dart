@@ -1,4 +1,3 @@
-import 'package:digifidelidade/app/modules/protected/tabs/tab_home_controller.dart';
 import 'package:digifidelidade/app/shared/models/cartao_model.dart';
 import 'package:digifidelidade/app/shared/widgets/cartao_qr.widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +6,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'tab_home_controller.dart';
 
 class TabHome extends StatefulWidget {
   const TabHome({
@@ -36,25 +37,25 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 5.0),
               child: CupertinoSegmentedControl(
                   borderColor: Colors.black,
                   unselectedColor: Colors.white,
                   selectedColor: Colors.black,
                   children: const <int, Widget>{
                     0: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(5),
                       child: Text(
                         'Todos',
                       ),
                     ),
                     1: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(5),
                       child: Text('Meus cartões'),
                     ),
                     2: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text('Cartões que participo'),
+                      padding: EdgeInsets.all(5),
+                      child: Text('Cartões externos'),
                     ),
                   },
                   groupValue: selectedIndex,
@@ -82,7 +83,7 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
                     ),
                     title: Text(
                       cartoes[index].documentReference.documentID,
-                      style: TextStyle(fontSize: 24),
+                      style: TextStyle(fontSize: 18),
                     ),
                     subtitle: Text(cartoes[index].descricaoPremio),
                   );

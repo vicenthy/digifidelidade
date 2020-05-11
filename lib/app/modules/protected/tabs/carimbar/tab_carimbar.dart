@@ -1,9 +1,10 @@
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:digifidelidade/app/modules/protected/tabs/tab_carimbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'tab_carimbar_controller.dart';
 
 class TabCarimbar extends StatefulWidget {
   const TabCarimbar({Key key}) : super(key: key);
@@ -42,7 +43,7 @@ class _TabCarimbarState
                         print("Acesso a camera não concedido");
                       } else {}
                     } on FormatException {
-                      print("erro desconhecido");
+                      print("erro FormatException");
                     } catch (e) {
                       print("erro desconhecido");
                     }
