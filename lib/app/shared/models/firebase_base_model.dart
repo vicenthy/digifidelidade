@@ -6,6 +6,6 @@ abstract class FirebaseBaseModel {
   DocumentReference get documentReference;
   toMap();
   save();
-  getAll();
+  add();
   delete();
 }

@@ -20,7 +20,6 @@ class TabHome extends StatefulWidget {
 
 class _TabHomeState extends ModularState<TabHome, TabHomeController> {
   int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,17 +43,17 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
                   selectedColor: Colors.black,
                   children: const <int, Widget>{
                     0: Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(7),
                       child: Text(
                         'Todos',
                       ),
                     ),
                     1: Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(7),
                       child: Text('Meus cartões'),
                     ),
                     2: Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(7),
                       child: Text('Cartões externos'),
                     ),
                   },
@@ -66,26 +65,44 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
                   }),
             ),
             Expanded(child: Observer(builder: (_) {
-              controller.load();
+              controller.loadTodos();
               List<CartaoModel> cartoes = controller.cartoes;
               return ListView.builder(
                 itemCount: cartoes.length,
                 itemBuilder: (_, index) {
-                  return ListTile(
-                    leading: Image.asset(
-                      "assets/img/icon-house.png",
-                      width: 70,
-                      height: 70,
+                  return GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return CartaoQRWidget(cartoes[index]);
+                          });
+                    },
+                    child: Slidable(
+                      actionPane: SlidableBehindActionPane(),
+                      actionExtentRatio: 0.25,
+                      child: Container(
+                        color: Colors.white,
+                        child: ListTile(
+                          leading: Image.asset(
+                            "assets/img/icon-house.png",
+                            width: 70,
+                            height: 70,
+                          ),
+                          trailing: Text(
+                            cartoes[index].qtdDeCarimbo.toString(),
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          title: Text(
+                            getSafeText(cartoes[index].titulo),
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          subtitle:
+                              Text(getSafeText(cartoes[index].descricaoPremio)),
+                        ),
+                      ),
+                      secondaryActions: [getEditarSlide()],
                     ),
-                    trailing: Text(
-                      cartoes[index].qtdDeCarimbo.toString(),
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    title: Text(
-                      cartoes[index].documentReference.documentID,
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    subtitle: Text(cartoes[index].descricaoPremio),
                   );
                 },
               );
@@ -106,6 +123,26 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
           ),
         ),
       ),
+    );
+  }
+
+  String getSafeText(String text) => text != null ? text : "";
+
+  IconSlideAction getEditarSlide() {
+    return IconSlideAction(
+      caption: 'Editar',
+      color: Colors.red,
+      icon: Icons.edit,
+      onTap: () {},
+    );
+  }
+
+  IconSlideAction getParticiparSlide() {
+    return IconSlideAction(
+      caption: 'Participar',
+      color: Colors.green,
+      icon: FontAwesomeIcons.userTag,
+      onTap: () {},
     );
   }
 

@@ -26,11 +26,27 @@ mixin _$TabHomeController on _TabHomeControllerBase, Store {
     }, _$cartoesAtom, name: '${_$cartoesAtom.name}_set');
   }
 
-  final _$loadAsyncAction = AsyncAction('load');
+  final _$loadCartoesUsuarioLogadoAsyncAction =
+      AsyncAction('loadCartoesUsuarioLogado');
 
   @override
-  Future load() {
-    return _$loadAsyncAction.run(() => super.load());
+  Future loadCartoesUsuarioLogado() {
+    return _$loadCartoesUsuarioLogadoAsyncAction
+        .run(() => super.loadCartoesUsuarioLogado());
+  }
+
+  final _$loadTodosAsyncAction = AsyncAction('loadTodos');
+
+  @override
+  Future loadTodos() {
+    return _$loadTodosAsyncAction.run(() => super.loadTodos());
+  }
+
+  final _$loadExternosAsyncAction = AsyncAction('loadExternos');
+
+  @override
+  Future loadExternos() {
+    return _$loadExternosAsyncAction.run(() => super.loadExternos());
   }
 
   @override

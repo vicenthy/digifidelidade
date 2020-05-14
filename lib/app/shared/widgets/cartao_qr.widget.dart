@@ -21,7 +21,7 @@ class CartaoQRWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(5.0),
               child: Text(
-                'Loja do Joao',
+                this.cartaoModel.titulo,
                 style: TextStyle(fontSize: 24),
               ),
             ),
@@ -36,13 +36,13 @@ class CartaoQRWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(5.0),
               child: QrImage(
-                data: '76237',
+                data: cartaoModel.documentReference.documentID,
                 size: 150,
               ),
             ),
             Center(
               child: Text(
-                '76237',
+                this.cartaoModel.documentReference.documentID,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

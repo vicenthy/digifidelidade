@@ -14,15 +14,24 @@ abstract class _TabHomeControllerBase with Store {
   FirebaseAuth auth = Modular.get();
   @observable
   ObservableList<CartaoModel> cartoes = ObservableList();
+
   @action
-  load() async {
+  loadCartoesUsuarioLogado() async {
     String uid = (await auth.currentUser()).uid;
-    CollectionReference collectionReference =
-        firestoreService.getCartoesCollection(uid);
-    QuerySnapshot snapshot = await collectionReference.getDocuments();
-    this.cartoes = snapshot.documents
+  }
+
+  @action
+  loadTodos() async {
+    List<DocumentSnapshot> documentos =
+        await this.firestoreService.getCartoes();
+    this.cartoes = documentos
         .map((cartao) => CartaoModel.fromFirebaseDocument(cartao))
         .toList()
         .asObservable();
+  }
+
+  @action
+  loadExternos() async {
+    String uid = (await auth.currentUser()).uid;
   }
 }

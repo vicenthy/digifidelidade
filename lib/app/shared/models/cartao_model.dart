@@ -5,22 +5,22 @@ class CartaoModel extends FirebaseBaseModel {
   CartaoModel();
 
   DocumentReference _documentReference;
-  CollectionReference inscritos;
   Timestamp validade;
   int qtdDeCarimbo;
   String descricaoPremio;
   bool ativo;
+  String titulo;
 
   @override
   DocumentReference get documentReference => this._documentReference;
 
   CartaoModel.fromFirebaseDocument(DocumentSnapshot document) {
     this._documentReference = document.reference;
-    this.inscritos = document.reference.collection("inscritos");
     this.validade = document.data['validade'];
     this.qtdDeCarimbo = document.data['qtdDeCarimbo'];
     this.descricaoPremio = document.data['descricaoPremio'];
     this.ativo = document.data['ativo'];
+    this.titulo = document.data['titulo'];
   }
 
   @override
@@ -30,19 +30,22 @@ class CartaoModel extends FirebaseBaseModel {
     map['qtdDeCarimbo'] = this.qtdDeCarimbo;
     map['ativo'] = this.ativo;
     map['descricaoPremio'] = this.descricaoPremio;
+    map['titulo'] = this.titulo;
     return map;
   }
 
   @override
   delete() {
-    this._documentReference.delete();
+    return this._documentReference.delete();
   }
 
   @override
-  getAll() {}
+  add() {
+    return this._documentReference.collection('cartoes').add(this.toMap());
+  }
 
   @override
   save() {
-    this._documentReference.updateData(toMap());
+    return this._documentReference.updateData(this.toMap());
   }
 }
