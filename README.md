@@ -2,4 +2,4 @@
 Aplicativo de cartão de fidelidade digital 
 
 
-<img alt="Prints do app" src="https://ibb.co/vh4jNnH" >
+<img src="https://i.ibb.co/nBMLXJb/Digi-Fidelidade.png" alt="Digi-Fidelidade" border="0">
