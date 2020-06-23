@@ -9,32 +9,15 @@ part of 'cadastro_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastroController on _CadastroControllerBase, Store {
-  final _$valueAtom = Atom(name: '_CadastroControllerBase.value');
-
-  @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
-  }
-
-  @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
-  }
-
   final _$_CadastroControllerBaseActionController =
       ActionController(name: '_CadastroControllerBase');
 
   @override
-  void increment() {
+  Future<AuthResult> criarCadastro(String email, String senha) {
     final _$actionInfo =
         _$_CadastroControllerBaseActionController.startAction();
     try {
-      return super.increment();
+      return super.criarCadastro(email, senha);
     } finally {
       _$_CadastroControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -42,7 +25,7 @@ mixin _$CadastroController on _CadastroControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = '';
     return '{$string}';
   }
 }

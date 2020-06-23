@@ -49,6 +49,13 @@ mixin _$TabHomeController on _TabHomeControllerBase, Store {
     return _$loadExternosAsyncAction.run(() => super.loadExternos());
   }
 
+  final _$loadMeusCartoesAsyncAction = AsyncAction('loadMeusCartoes');
+
+  @override
+  Future loadMeusCartoes() {
+    return _$loadMeusCartoesAsyncAction.run(() => super.loadMeusCartoes());
+  }
+
   @override
   String toString() {
     final string = 'cartoes: ${cartoes.toString()}';

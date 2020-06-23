@@ -1,3 +1,4 @@
+import 'package:digifidelidade/config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,18 +17,23 @@ class _TabTelaCartoesState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: MaterialButton(
-          color: Colors.black,
-          child: Text(
-            'Sair',
-            style: TextStyle(color: Colors.white),
+      body: Column(
+        children: <Widget>[
+          Text(Config.currentUser.email),
+          Center(
+            child: MaterialButton(
+              color: Colors.black,
+              child: Text(
+                'Sair',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Modular.get<FirebaseAuth>().signOut();
+                Modular.to.pushReplacementNamed('/');
+              },
+            ),
           ),
-          onPressed: () {
-            Modular.get<FirebaseAuth>().signOut();
-            Modular.to.pushReplacementNamed('/');
-          },
-        ),
+        ],
       ),
     );
   }

@@ -5,7 +5,4 @@ abstract class FirebaseBaseModel {
   FirebaseBaseModel.fromFirebaseDocument(DocumentSnapshot document);
   DocumentReference get documentReference;
   toMap();
-  save();
-  add();
-  delete();
 }

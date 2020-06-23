@@ -1,3 +1,4 @@
+import 'package:digifidelidade/config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,6 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(Duration(seconds: 2)).then((value) {
       Modular.get<FirebaseAuth>().currentUser().then((result) {
         if (result != null) {
+          Config.currentUser = result;
           Modular.to.pushReplacementNamed('/protected');
         } else {
           Modular.to.pushReplacementNamed('/login');

@@ -1,5 +1,6 @@
 import 'package:digifidelidade/app/shared/models/cartao_model.dart';
 import 'package:digifidelidade/app/shared/widgets/cartao_qr.widget.dart';
+import 'package:digifidelidade/config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -20,6 +21,13 @@ class TabHome extends StatefulWidget {
 
 class _TabHomeState extends ModularState<TabHome, TabHomeController> {
   int selectedIndex = 0;
+
+  @override
+  void initState() {
+    controller.loadTodos();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,46 +44,58 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5.0),
-              child: CupertinoSegmentedControl(
-                  borderColor: Colors.black,
-                  unselectedColor: Colors.white,
-                  selectedColor: Colors.black,
-                  children: const <int, Widget>{
-                    0: Padding(
-                      padding: const EdgeInsets.all(7),
-                      child: Text(
-                        'Todos',
+              padding: const EdgeInsets.only(top: 2.0, bottom: 5.0),
+              child: Observer(builder: (_) {
+                return CupertinoSegmentedControl(
+                    borderColor: Colors.black,
+                    unselectedColor: Colors.white,
+                    selectedColor: Colors.black,
+                    children: const <int, Widget>{
+                      0: Padding(
+                        padding: const EdgeInsets.all(7),
+                        child: Text(
+                          'Todos',
+                        ),
                       ),
-                    ),
-                    1: Padding(
-                      padding: EdgeInsets.all(7),
-                      child: Text('Meus cartões'),
-                    ),
-                    2: Padding(
-                      padding: EdgeInsets.all(7),
-                      child: Text('Cartões externos'),
-                    ),
-                  },
-                  groupValue: selectedIndex,
-                  onValueChanged: (value) {
-                    setState(() {
-                      selectedIndex = value;
+                      1: Padding(
+                        padding: EdgeInsets.all(7),
+                        child: Text('Meus cartões'),
+                      ),
+                      2: Padding(
+                        padding: EdgeInsets.all(7),
+                        child: Text('Outros Cartões'),
+                      ),
+                    },
+                    groupValue: selectedIndex,
+                    onValueChanged: (value) {
+                      setState(() {
+                        selectedIndex = value;
+                        switch (selectedIndex) {
+                          case 0:
+                            controller.loadTodos();
+                            break;
+                          case 1:
+                            controller.loadMeusCartoes();
+                            break;
+                          case 2:
+                            controller.loadExternos();
+                            break;
+                          default:
+                        }
+                      });
                     });
-                  }),
+              }),
             ),
             Expanded(child: Observer(builder: (_) {
-              controller.loadTodos();
-              List<CartaoModel> cartoes = controller.cartoes;
               return ListView.builder(
-                itemCount: cartoes.length,
+                itemCount: controller.cartoes.length,
                 itemBuilder: (_, index) {
                   return GestureDetector(
                     onTap: () {
                       showDialog(
                           context: context,
                           builder: (_) {
-                            return CartaoQRWidget(cartoes[index]);
+                            return CartaoQRWidget(controller.cartoes[index]);
                           });
                     },
                     child: Slidable(
@@ -90,18 +110,21 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
                             height: 70,
                           ),
                           trailing: Text(
-                            cartoes[index].qtdDeCarimbo.toString(),
+                            controller.cartoes[index].qtdDeCarimbo.toString(),
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           title: Text(
-                            getSafeText(cartoes[index].titulo),
+                            getSafeText(controller.cartoes[index].titulo),
                             style: TextStyle(fontSize: 18),
                           ),
-                          subtitle:
-                              Text(getSafeText(cartoes[index].descricaoPremio)),
+                          subtitle: Text(getSafeText(
+                              controller.cartoes[index].descricaoPremio)),
                         ),
                       ),
-                      secondaryActions: [getEditarSlide()],
+                      secondaryActions: controller.cartoes[index].uid ==
+                              Config.currentUser.uid
+                          ? [getEditarSlide()]
+                          : [getParticiparSlide()],
                     ),
                   );
                 },
@@ -110,8 +133,8 @@ class _TabHomeState extends ModularState<TabHome, TabHomeController> {
           ],
         ),
         floatingActionButton: Container(
-          width: 70,
-          height: 70,
+          width: 60,
+          height: 60,
           child: FloatingActionButton(
             backgroundColor: Colors.black,
             child: Icon(

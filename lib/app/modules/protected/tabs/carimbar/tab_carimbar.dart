@@ -41,14 +41,14 @@ class _TabCarimbarState
                     } on PlatformException catch (e) {
                       if (e.code == BarcodeScanner.CameraAccessDenied) {
                         print("Acesso a camera não concedido");
-                      } else {}
+                      }
                     } on FormatException {
                       print("erro FormatException");
                     } catch (e) {
                       print("erro desconhecido");
                     }
                   },
-                  iconSize: 50,
+                  iconSize: 45,
                   color: Colors.black.withOpacity(0.5),
                 )
               ],

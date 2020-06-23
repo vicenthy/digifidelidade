@@ -1,4 +1,5 @@
 import 'package:digifidelidade/app/shared/models/cartao_model.dart';
+import 'package:digifidelidade/config.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -36,7 +37,8 @@ class CartaoQRWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(5.0),
               child: QrImage(
-                data: cartaoModel.documentReference.documentID,
+                data:
+                    "${cartaoModel.documentReference.documentID};${Config.currentUser.uid}",
                 size: 150,
               ),
             ),

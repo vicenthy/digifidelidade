@@ -14,9 +14,10 @@ description: &#x27;A new Flutter project. Created by Slidy&#x27;
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.1.0 <3.0.0'
+  sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
+  intl: ^0.16.1
   firebase_auth: ^0.16.0
   firebase_core: ^0.4.4+3
   cloud_firestore: ^0.13.4+2
@@ -27,7 +28,7 @@ dependencies:
   dio: ^3.0.9
   flutter_mobx: ^1.1.0
   mobx: ^1.1.1
-  flutter_modular: ^1.0.0
+  flutter_modular: ^1.2.5+1
   flutter:
     sdk: flutter
 

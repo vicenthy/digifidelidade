@@ -4,11 +4,7 @@ import 'package:digifidelidade/app/shared/models/firebase_base_model.dart';
 class InscritoCartaoModel extends FirebaseBaseModel {
   DocumentReference _documentReference;
   String uid;
-  Timestamp datahora;
-  CollectionReference carimbos;
-  Firestore store;
-
-  InscritoCartaoModel(this.store);
+  String uidInscrito;
 
   @override
   DocumentReference get documentReference => this._documentReference;
@@ -16,15 +12,15 @@ class InscritoCartaoModel extends FirebaseBaseModel {
   InscritoCartaoModel.fromFirebaseDocument(DocumentSnapshot document) {
     this._documentReference = document.reference;
     this.uid = document.data['uid'];
-    this.datahora = document['datahora'];
-    this.carimbos = this._documentReference.collection("carimbos");
+    this.uidInscrito = document.data['uid-inscrito'];
   }
 
   @override
   toMap() {
     var map = Map<String, dynamic>();
     map['uid'] = this.uid;
-    map['datahora'] = this.datahora;
+    map['uid-inscrito'] = this.uid;
+
     return map;
   }
 
@@ -32,9 +28,6 @@ class InscritoCartaoModel extends FirebaseBaseModel {
   delete() {
     this._documentReference.delete();
   }
-
-  @override
-  getAll() {}
 
   @override
   save() {

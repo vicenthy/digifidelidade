@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digifidelidade/app/shared/models/cartao_model.dart';
 import 'package:digifidelidade/app/shared/services/firestore_service.dart';
+import 'package:digifidelidade/config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -11,14 +12,11 @@ class TabHomeController = _TabHomeControllerBase with _$TabHomeController;
 
 abstract class _TabHomeControllerBase with Store {
   FirestoreService firestoreService = Modular.get();
-  FirebaseAuth auth = Modular.get();
   @observable
   ObservableList<CartaoModel> cartoes = ObservableList();
 
   @action
-  loadCartoesUsuarioLogado() async {
-    String uid = (await auth.currentUser()).uid;
-  }
+  loadCartoesUsuarioLogado() async {}
 
   @action
   loadTodos() async {
@@ -31,7 +29,16 @@ abstract class _TabHomeControllerBase with Store {
   }
 
   @action
-  loadExternos() async {
-    String uid = (await auth.currentUser()).uid;
+  loadExternos() async {}
+
+  @action
+  loadMeusCartoes() async {
+    List<DocumentSnapshot> documentos =
+        await this.firestoreService.getCartoesUserUid(Config.currentUser.uid);
+    this.cartoes = documentos
+        .map((cartao) => CartaoModel.fromFirebaseDocument(cartao))
+        .toList()
+        .asObservable();
+    print(cartoes);
   }
 }

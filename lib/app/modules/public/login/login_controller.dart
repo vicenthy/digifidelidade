@@ -2,6 +2,8 @@ import 'package:digifidelidade/app/shared/services/firebase_auth_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../../config.dart';
+
 part 'login_controller.g.dart';
 
 class LoginController = _LoginControllerBase with _$LoginController;
@@ -30,6 +32,7 @@ abstract class _LoginControllerBase with Store {
     if (isValid) {
       firebsaeauth.login(this.email, this.password).then((result) {
         if (result != null) {
+          Config.currentUser = result.user;
           Modular.to.pushReplacementNamed('/protected');
         }
       }).catchError((onError) {
